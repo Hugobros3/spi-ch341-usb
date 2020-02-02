@@ -1367,7 +1367,7 @@ static int ch341_usb_probe (struct usb_interface* usb_if,
     
     if ((error = ch341_cfg_probe (ch341_dev)) ||  // initialize board configuration    
         (error = ch341_spi_probe (ch341_dev)) ||  // initialize SPI master and slaves
-        (error = ch341_irq_probe (ch341_dev))) ||  // initialize IRQs
+        (error = ch341_irq_probe (ch341_dev))) // initialize IRQs
     {
         ch341_usb_free_device (ch341_dev);
         return error;
