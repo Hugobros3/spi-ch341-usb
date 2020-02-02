@@ -1295,7 +1295,6 @@ static void ch341_usb_free_device (struct ch341_device* ch341_dev)
 {
     CHECK_PARAM (ch341_dev)
 
-    ch341_gpio_remove (ch341_dev);
     ch341_irq_remove  (ch341_dev);
     ch341_spi_remove  (ch341_dev);
     ch341_cfg_remove  (ch341_dev);
@@ -1368,8 +1367,7 @@ static int ch341_usb_probe (struct usb_interface* usb_if,
     
     if ((error = ch341_cfg_probe (ch341_dev)) ||  // initialize board configuration    
         (error = ch341_spi_probe (ch341_dev)) ||  // initialize SPI master and slaves
-        (error = ch341_irq_probe (ch341_dev)) ||  // initialize IRQs
-        (error = ch341_gpio_probe(ch341_dev)))    // initialize GPIOs
+        (error = ch341_irq_probe (ch341_dev))) ||  // initialize IRQs
     {
         ch341_usb_free_device (ch341_dev);
         return error;

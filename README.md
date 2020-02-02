@@ -1,5 +1,9 @@
 # CH341A USB to SPI and GPIO Linux kernel driver
 
+## Hugo's fork notes
+
+This fork of the driver just has the GPIO bits nuked out because they were causing issue when multiple instances of the device were used. Just removed the init/deinit calls made the trick in my testing.
+
 The driver can be used with CH341A USB to UART/I2C/SPI adapter boards to connect SPI slaves to a Linux host. It uses either the **fast SPI hardware interface** which is, however, limited to SPI mode 0 **or** a **slow SPI bit banging implementation**.
 
 Additionally, CH341A data pins that are not used for the SPI interface can be configured as **GPIO** pins. The driver can generate **software interrupts** for all input pins. **One input** pin can be connected with the CH341A interrupt pin to generate **hardware interrupts**. However, since USB is an asynchronous communication system, it is not possible to guarantee exact timings for GPIOs and interrupts.
